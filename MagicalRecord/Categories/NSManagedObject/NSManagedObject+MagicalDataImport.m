@@ -27,6 +27,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
+//#warning If you implement valueForUndefinedKey: in any NSObject in your code, this may be the problem if something broke
+- (id) MR_valueForUndefinedKey:(NSString *)key
+{
+  return nil;
+}
+
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
 {
     NSString *selectorString = [NSString stringWithFormat:@"import%@:", [key MR_capitalizedFirstCharacterString]];

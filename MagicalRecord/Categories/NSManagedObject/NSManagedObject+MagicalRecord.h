@@ -9,6 +9,18 @@
 
 #define kMagicalRecordDefaultBatchSize 20
 
+@protocol MR_ManagedObjectCustomization <NSObject>
+
+@optional
+
+- (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)context;
+- (instancetype)insertInManagedObjectContext:(NSManagedObjectContext*)context;
+- (BOOL)shouldImport:(id)objectData;
+- (void)willImport:(id)objectData;
+- (void)didImport:(id)objectData;
+
+@end
+
 @interface NSManagedObject (MagicalRecord)
 
 + (NSUInteger) MR_defaultBatchSize;
